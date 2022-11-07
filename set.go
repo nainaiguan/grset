@@ -13,6 +13,7 @@ func (s *set) regist(id any) (context.Context, error) {
 		log.Printf("regist err: %s", err)
 		return nil, err
 	}
+	s.mu.RUnlock()
 
 	s.mu.Lock()
 	defer s.mu.Unlock()

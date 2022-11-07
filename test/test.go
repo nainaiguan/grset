@@ -9,8 +9,8 @@ import (
 
 func main() {
 	gr := grset.NewGrSet()
-	c1 := gr.Register(1)
-	c2 := gr.Register(2)
+	c1, _ := gr.Register(1)
+	c2, _ := gr.Register(2)
 
 	wg := sync.WaitGroup{}
 	wg.Add(2)
