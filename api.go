@@ -1,16 +1,23 @@
 package grset
 
-import "context"
+import (
+	"context"
+)
 
 type grset interface {
-	Register(id any) context.Context
+	Register(id any) (context.Context, error)
 	Shut(id any)
 	Total() int
 }
 
-func (grs *grSet) Register(id any) context.Context {
+func (grs *grSet) Register(id any) (context.Context, error) {
 	defer grs.total.add()
-	return grs.set.regist(id)
+	c, err := grs.set.regist(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return c, nil
 }
 
 func (grs *grSet) Shut(id any) {
